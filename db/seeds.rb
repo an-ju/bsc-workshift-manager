@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-users = [{:username => "marry",:password => "123"},{:username => "bob", :password => "456" }]
+users = [{:username => "Mary",:password => "Mary123"},{:username => "Bob", :password => "Bob456" }]
 
 users.each do |user|
   User.init(user[:username], user[:password])
