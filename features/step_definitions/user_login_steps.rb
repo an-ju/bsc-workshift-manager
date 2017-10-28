@@ -9,7 +9,7 @@ When /^(?:|I )log in as "(.*)" with password "(.*)"$/ do |us, pa|
     steps %Q{
         select "#{email}" from "user_email"
         fill in "user_password" with "#{pass}"
-        press "commit"
+        press "Log in"
     }
 end
 

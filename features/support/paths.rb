@@ -21,6 +21,13 @@ module NavigationHelpers
         id = User.find_by(username: $1).id
         user_path(id)
 
+    when /^the preferences page for "(.*)$"/
+        id = User.find_by(username: $1).id
+        user_preference_path(id)
+
+    when /^the user creation page$/
+        new_user_path
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

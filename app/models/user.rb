@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     @@cipher = OpenSSL::Cipher::AES.new(256, :CFB) #Will implement encryption for sensitive data
 
     def self.init(username, email, password)
-        new_user = User.new(username: username, password: password, email: email)
+        new_user = User.new(username: username, password: password, email: email, manage: false)
         return new_user.save
     end
 
