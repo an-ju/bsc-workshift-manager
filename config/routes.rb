@@ -1,13 +1,8 @@
 Rails.application.routes.draw do
 
-    resources :semesters do
-        resources :shifts, :except => [:index]
-    end
-    
-    root :to => "users#index"
-    #FIXME with proper controller path
+  root :to => "application#home"
 
-    resources :users do
+  resources :users do
         resources :preferences, :except => [:destroy] do
             collection do
               get "/none" , :to => "preferences#no", :as => "no"
@@ -15,5 +10,11 @@ Rails.application.routes.draw do
             end
         end
     end
+  
+    resources :semesters do
+        resources :shifts, :except => [:index]
+    end
+    
+    devise_for :user
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
