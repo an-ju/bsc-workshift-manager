@@ -1,36 +1,31 @@
 require 'spec_helper'
 require 'User'
 
+# These tests were more important when login was implemented from scratch
+# Now that the login is handled by devise, these tests mostly show that
+# we've implemented devise somewhat properly, and know what to expect from it
+
 describe User do
 
     before(:each) do
-        @user = "Username of some sort"
-        @pass = "Password of some sort"
+        @user  = "Username of some sort"
+        @email = "generic@berkeley.edu"
+        @pass  = "Password of some sort"
     end
 
-    it "accepts a username and password" do
-        expect(User).to receive(:create)
-        User.init(@user, @pass)
+    it "accepts a username, email, and password" do
+        expect(User).to receive(:new).and_return(User.new(username: @user, password: @pass, email: @email))
+        User.init(@user, @email, @pass)
     end
 
     it "correctly hides the password" do
-        allow(User).to receive(:create).with(username: @user, password: @pass, )
-        User.init(@user, @pass)
+        User.init(@user, @email, @pass)
+        expect(User.find_by(username: @user).encrypted_password).not_to eq(@pass)
     end
 
     it "properly saves" do
-        v = User.init(@user, @pass)
+        v = User.init(@user, @email, @pass)
         expect(v).to eq(true)
-    end
-
-    it "validates a valid user" do
-        User.create(username: @user, hashed_pass: @hash)
-        expect(User.validate(@user, @pass)).to eq(true)
-    end
-
-    it "invalidates an invalid user" do
-        User.create(username: @user, hashed_pass: @hash)
-        expect(User.validate(@user, "rubyistheworst")).to eq(false)
     end
 
 end

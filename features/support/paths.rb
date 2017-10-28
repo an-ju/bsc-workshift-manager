@@ -13,7 +13,9 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the home\s?page$/ then users_path
+    when /^the home\s?page$/ then  "/"
+
+    when /^the sign in page$/ then new_user_session_path
 
     when /^the personal page for "(.*)"$/
         id = User.find_by(username: $1).id
